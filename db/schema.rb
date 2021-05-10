@@ -10,19 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_10_071238) do
+ActiveRecord::Schema.define(version: 2021_05_10_060707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "bookings", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.decimal "total_price", precision: 5, scale: 2
-    t.date "date"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_bookings_on_user_id"
-  end
 
   create_table "celebrities", force: :cascade do |t|
     t.string "name"
@@ -40,8 +31,6 @@ ActiveRecord::Schema.define(version: 2021_05_10_071238) do
     t.string "activities"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "booking_id", null: false
-    t.index ["booking_id"], name: "index_experiences_on_booking_id"
     t.index ["celebrities_id"], name: "index_experiences_on_celebrities_id"
     t.index ["user_id"], name: "index_experiences_on_user_id"
   end
@@ -71,8 +60,6 @@ ActiveRecord::Schema.define(version: 2021_05_10_071238) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "bookings", "users"
-  add_foreign_key "experiences", "bookings"
   add_foreign_key "experiences", "celebrities", column: "celebrities_id"
   add_foreign_key "experiences", "users"
   add_foreign_key "reviews", "experiences"
