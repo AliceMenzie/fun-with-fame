@@ -4,5 +4,5 @@ class Experience < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_one :booking, dependent: :destroy
   validates :price, :numericality => {:greater_than => 0, :less_than => 1_000_000}, presence: true 
-  validates :description, :duration, :location, :activity, :booking_id, presence: true
+  validates :duration, :location, :activity, :booking_id, presence: true
 end
